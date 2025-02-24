@@ -1,22 +1,36 @@
 # 🍃🍀  
-import json
+from cryptography.fernet import Fernet
+import zlib
+import base64
 
-class JsonFile:
-    def add():
-        pass
-    def remove():
-        pass
-    def read():
-        with open("data.json", "r") as file:
-            data = json.load(file)
+# Generate a key (store this securely)
+key = Fernet.generate_key()
+cipher = Fernet(key)
 
-        john_age = next(person["age"] for person in data["data"] if person["name"] == "Jane")
-        print(john_age)
-    def list_projects():
-        pass
-    def edit():
-        pass    
+def encrypt_message(message: str) -> bytes:
+    # Compress the message
+    compressed_message = zlib.compress(message.encode())
+    
+    # Encrypt the compressed message
+    encrypted_message = cipher.encrypt(compressed_message)
+    
+    return encrypted_message
 
+def decrypt_message(encrypted_message: bytes) -> str:
+    # Decrypt the message
+    decrypted_compressed_message = cipher.decrypt(encrypted_message)
+    
+    # Decompress the message
+    original_message = zlib.decompress(decrypted_compressed_message).decode()
+    
+    return original_message
 
+# Example usage
+message = "Hello, this is a secret message!"
+encrypted = encrypt_message(message)
+print("Encrypted:", base64.b64encode(encrypted).decode())  # Base64 for readability
 
+# Decryption
+decrypted = decrypt_message(encrypted)
+print("Decrypted:", decrypted)
 # written by Pratham 🍂🍁
