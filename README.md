@@ -1,5 +1,3 @@
-Perfect! Here's your **detailed daily routine with time slots, bath time, and a vegetarian diet plan** tailored to help you improve your English, social skills, trading knowledge, and build a muscular body.
-
 ---
 
 ## 🌞 **Daily Routine (During College Break)**
